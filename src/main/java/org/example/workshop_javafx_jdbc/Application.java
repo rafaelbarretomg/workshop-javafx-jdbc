@@ -1,4 +1,4 @@
-package org.example.workshopjavafxjdbc;
+package org.example.workshop_javafx_jdbc;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
