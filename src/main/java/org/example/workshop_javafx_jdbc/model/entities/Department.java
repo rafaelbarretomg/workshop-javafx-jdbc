@@ -1,4 +1,4 @@
-package org.example.workshop_javafx_jdbc;
+package org.example.workshop_javafx_jdbc.model.entities;
 
 import java.io.Serializable;
 

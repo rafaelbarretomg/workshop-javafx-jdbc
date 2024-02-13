@@ -10,6 +10,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
 import org.example.workshop_javafx_jdbc.gui.util.Alerts;
+import org.example.workshop_javafx_jdbc.model.services.DepartmentService;
 
 import java.io.IOException;
 import java.net.URL;

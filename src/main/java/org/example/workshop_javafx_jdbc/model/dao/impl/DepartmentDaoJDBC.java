@@ -1,6 +1,6 @@
 package org.example.workshop_javafx_jdbc.model.dao.impl;
 
-import org.example.workshop_javafx_jdbc.Department;
+import org.example.workshop_javafx_jdbc.model.entities.Department;
 import org.example.workshop_javafx_jdbc.db.DB;
 import org.example.workshop_javafx_jdbc.db.DbException;
 import org.example.workshop_javafx_jdbc.db.DbIntegrityException;
@@ -12,7 +12,7 @@ import java.util.List;
 
 public class DepartmentDaoJDBC implements DepartmentDao {
 
-    private Connection conn;
+    private final Connection conn;
 
     public DepartmentDaoJDBC(Connection conn) {
         this.conn = conn;

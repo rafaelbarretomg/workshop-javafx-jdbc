@@ -1,7 +1,7 @@
 package org.example.workshop_javafx_jdbc.model.dao.impl;
 
-import org.example.workshop_javafx_jdbc.Department;
-import org.example.workshop_javafx_jdbc.Seller;
+import org.example.workshop_javafx_jdbc.model.entities.Department;
+import org.example.workshop_javafx_jdbc.model.entities.Seller;
 import org.example.workshop_javafx_jdbc.db.DB;
 import org.example.workshop_javafx_jdbc.db.DbException;
 import org.example.workshop_javafx_jdbc.model.dao.SellerDao;
@@ -16,7 +16,7 @@ import java.util.Map;
 
 public class SellerDaoJDBC implements SellerDao {
 
-    private Connection conn;
+    private final Connection conn;
 
     public SellerDaoJDBC(Connection conn) {
         this.conn = conn;
