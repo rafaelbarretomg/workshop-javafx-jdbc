@@ -52,7 +52,7 @@ public class SellerListController implements Initializable, DataChangeListener {
     private TableColumn<Seller, Seller> tableColumnEDIT;
 
     @FXML
-    private TableColumn<Seller,Seller> tableColumnREMOVE;
+    private TableColumn<Seller, Seller> tableColumnREMOVE;
 
     @FXML
     private Button btNew;
@@ -60,13 +60,13 @@ public class SellerListController implements Initializable, DataChangeListener {
     private ObservableList<Seller> obsList;
 
     @FXML
-    public void onBtNewAction(ActionEvent event){
+    public void onBtNewAction(ActionEvent event) {
         Stage parentStage = Utils.currentStage(event);
         Seller obj = new Seller();
-       // createDialogForm(obj,"SellerForm.fxml", parentStage);
+        createDialogForm(obj,"SellerForm.fxml", parentStage);
     }
 
-    public void setSellerService(SellerService service){
+    public void setSellerService(SellerService service) {
         this.service = service;
     }
 
@@ -88,18 +88,19 @@ public class SellerListController implements Initializable, DataChangeListener {
         tableViewSeller.prefHeightProperty().bind(stage.heightProperty());
 
     }
-    public void updateTableView(){
-        if(service == null){
+
+    public void updateTableView() {
+        if (service == null) {
             throw new IllegalArgumentException("Service was null");
         }
         List<Seller> list = service.findAll();
         obsList = FXCollections.observableArrayList(list);
         tableViewSeller.setItems(obsList);
-       initEditButtons();
+        initEditButtons();
         initRemoveButtons();
     }
-/*
-    private void createDialogForm(Seller obj, String absoluteName, Stage parentStage){
+
+    private void createDialogForm(Seller obj, String absoluteName, Stage parentStage) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(absoluteName));
             Pane pane = loader.load();
@@ -118,12 +119,12 @@ public class SellerListController implements Initializable, DataChangeListener {
             dialogStage.initOwner(parentStage);
             dialogStage.initModality(Modality.WINDOW_MODAL);
             dialogStage.showAndWait();
-        }catch (IOException e){
+        } catch (IOException e) {
             Alerts.showAlert("IO Exception", "Error loading view", e.getMessage(), Alert.AlertType.ERROR);
             e.printStackTrace();
         }
     }
-*/
+
 
     @Override
     public void onDataChanged() {
@@ -134,6 +135,7 @@ public class SellerListController implements Initializable, DataChangeListener {
         tableColumnEDIT.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
         tableColumnEDIT.setCellFactory(param -> new TableCell<Seller, Seller>() {
             private final Button button = new Button("edit");
+
             @Override
             protected void updateItem(Seller obj, boolean empty) {
                 super.updateItem(obj, empty);
@@ -142,9 +144,9 @@ public class SellerListController implements Initializable, DataChangeListener {
                     return;
                 }
                 setGraphic(button);
-              //  button.setOnAction(
-                     //   event -> createDialogForm(
-                      //          obj, "SellerForm.fxml",Utils.currentStage(event)));
+                button.setOnAction(
+                        event -> createDialogForm(
+                                obj, "SellerForm.fxml", Utils.currentStage(event)));
             }
         });
     }
@@ -153,6 +155,7 @@ public class SellerListController implements Initializable, DataChangeListener {
         tableColumnREMOVE.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
         tableColumnREMOVE.setCellFactory(param -> new TableCell<Seller, Seller>() {
             private final Button button = new Button("remove");
+
             @Override
             protected void updateItem(Seller obj, boolean empty) {
                 super.updateItem(obj, empty);
@@ -168,19 +171,18 @@ public class SellerListController implements Initializable, DataChangeListener {
 
     private void removeEntity(Seller obj) {
         Optional<ButtonType> result = Alerts.showConfirmation("Confirmation", "Are you sure to delete?");
-        if(result.get() == ButtonType.OK){
-            if(service==null){
+        if (result.get() == ButtonType.OK) {
+            if (service == null) {
                 throw new IllegalStateException("Service was null");
             }
             try {
                 service.remove(obj);
                 updateTableView();
-            }catch (DbIntegrityException e){
+            } catch (DbIntegrityException e) {
                 Alerts.showAlert("Error removing object", null, e.getMessage(), Alert.AlertType.ERROR);
             }
 
         }
-
 
 
     }
