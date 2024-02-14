@@ -12,4 +12,6 @@ module org.example.workshopjavafxjdbc {
     opens org.example.workshop_javafx_jdbc.model.services to javafx.fxml;
     exports org.example.workshop_javafx_jdbc.gui.util;
     opens org.example.workshop_javafx_jdbc.gui.util to javafx.fxml;
+    exports org.example.workshop_javafx_jdbc.gui.listener;
+    opens org.example.workshop_javafx_jdbc.gui.listener to javafx.fxml;
 }

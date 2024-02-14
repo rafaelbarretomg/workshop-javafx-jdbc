@@ -15,6 +15,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import org.example.workshop_javafx_jdbc.gui.listener.DataChangeListener;
 import org.example.workshop_javafx_jdbc.gui.util.Alerts;
 import org.example.workshop_javafx_jdbc.gui.util.Utils;
 import org.example.workshop_javafx_jdbc.model.entities.Department;
@@ -25,7 +26,7 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class DepartmentListController implements Initializable {
+public class DepartmentListController implements Initializable, DataChangeListener {
 
 
     private DepartmentService service;
@@ -85,7 +86,9 @@ public class DepartmentListController implements Initializable {
             DepartmentFormController controller = loader.getController();
             controller.setDepartment(obj);
             controller.setDepartmentService(new DepartmentService());
+            controller.subscribeDataChangeListener(this);
             controller.updateFormData();
+
 
             Stage dialogStage = new Stage();
             dialogStage.setTitle("Enter Department data");
@@ -101,4 +104,8 @@ public class DepartmentListController implements Initializable {
     }
 
 
+    @Override
+    public void onDataChanged() {
+        updateTableView();
+    }
 }
